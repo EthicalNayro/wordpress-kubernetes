@@ -447,8 +447,15 @@ aws ecr describe-images \
 
 Project evidence and screenshots are stored in the `K8s-project/` directory.
 
-![1](K8s/minikube.png)
-
+![1](K8s-project/minikube.png)
+![2](K8s-project/ecr.png)
+![3](K8s-project/image-in-ecr.png)
+![4](K8s-project/k8s-running.png)
+![5](K8s-project/controller-nginx.png)
+![6](K8s-project/ingress-working.png)
+![7](K8s-project/monitoring.png)
+![8](K8s-project/grafana.png)
+![9](K8s-project/prom-metrics.png)
 ```
 
 Screenshots demonstrate:
