@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-wordpress
+  labels:
+    app: {{ .Release.Name }}-wordpress
+spec:
+  type: {{ .Values.wordpress.service.type }}
+  selector:
+    app: {{ .Release.Name }}-wordpress
+  ports:
+    - name: http
+      port: {{ .Values.wordpress.service.port }}
+      targetPort: 80
+      protocol: TCP

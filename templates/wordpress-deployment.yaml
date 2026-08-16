@@ -1,0 +1,66 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-wordpress
+  labels:
+    app: {{ .Release.Name }}-wordpress
+spec:
+  replicas: {{ .Values.wordpress.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-wordpress
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-wordpress
+    spec:
+      imagePullSecrets:
+        - name: ecr-registry-secret
+
+      containers:
+        - name: wordpress
+          image: "{{ .Values.wordpress.image.repository }}:{{ .Values.wordpress.image.tag }}"
+          imagePullPolicy: {{ .Values.wordpress.image.pullPolicy }}
+          ports:
+            - containerPort: 80
+              name: http
+
+          env:
+            - name: WORDPRESS_DB_HOST
+              value: "{{ .Release.Name }}-mariadb:{{ .Values.mariadb.service.port }}"
+
+            - name: WORDPRESS_DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-credentials
+                  key: MYSQL_DATABASE
+
+            - name: WORDPRESS_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-credentials
+                  key: MYSQL_USER
+
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-credentials
+                  key: MYSQL_PASSWORD
+
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.wordpress.probes.readiness.path }}
+              port: http
+            initialDelaySeconds: {{ .Values.wordpress.probes.readiness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.wordpress.probes.readiness.periodSeconds }}
+
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.wordpress.probes.liveness.path }}
+              port: http
+            initialDelaySeconds: {{ .Values.wordpress.probes.liveness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.wordpress.probes.liveness.periodSeconds }}
+
+          resources:
+            {{- toYaml .Values.wordpress.resources | nindent 12 }}

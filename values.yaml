@@ -1,0 +1,65 @@
+wordpress:
+  replicaCount: 2
+
+  image:
+    repository: 992382545251.dkr.ecr.us-east-1.amazonaws.com/wordpress-k8s
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  service:
+    type: ClusterIP
+    port: 80
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+  probes:
+    readiness:
+      path: /wp-login.php
+      initialDelaySeconds: 30
+      periodSeconds: 10
+
+    liveness:
+      path: /wp-login.php
+      initialDelaySeconds: 60
+      periodSeconds: 20
+
+mariadb:
+  image:
+    repository: mariadb
+    tag: "10.11"
+
+  database: wordpress
+  username: wordpress
+
+  rootPassword: ""
+  password: ""
+
+  service:
+    port: 3306
+
+  persistence:
+    size: 5Gi
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+ingress:
+  enabled: true
+  className: nginx
+
+  host: wordpress.local
+
+  path: /
+
+  pathType: Prefix
