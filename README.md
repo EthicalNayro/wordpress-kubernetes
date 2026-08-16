@@ -445,26 +445,10 @@ aws ecr describe-images \
 
 # 📸 Screenshots
 
-Project evidence and screenshots are stored in the `screenshots/` directory.
+Project evidence and screenshots are stored in the `K8s-project/` directory.
 
-Recommended structure:
+![1](K8s/minikube)
 
-```text
-screenshots/
-├── 01-helm/
-│   └── rendered-resources.png
-│
-├── 02-ecr/
-│   └── image-in-ecr.png
-│
-├── 03-kubernetes/
-│   └── workloads-running.png
-│
-├── 04-ingress/
-│   └── ingress-working.png
-│
-└── 05-monitoring/
-    └── grafana-dashboard.png
 ```
 
 Screenshots demonstrate:
