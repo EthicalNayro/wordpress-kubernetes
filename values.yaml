@@ -2,7 +2,7 @@ wordpress:
   replicaCount: 2
 
   image:
-    repository: 992382545251.dkr.ecr.us-east-1.amazonaws.com/wordpress-k8s
+    repository: <AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/wordpress-k8s
     tag: latest
     pullPolicy: IfNotPresent
 
