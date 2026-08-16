@@ -540,10 +540,3 @@ The final solution provides:
 * Grafana dashboards
 * Cluster-level observability
 
----
-
-## Author
-
-**Orian Roas**
-
-DevOps / Cloud / Kubernetes Project
