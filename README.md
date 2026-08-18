@@ -248,9 +248,6 @@ helm install wordpress . \
   --set mariadb.rootPassword='<ROOT_PASSWORD>' \
   --set mariadb.password='<PASSWORD>'
 ```
-
-> Do not commit real passwords to Git.
-
 ---
 
 # 🌐 NGINX Ingress
@@ -451,7 +448,7 @@ Project evidence and screenshots are stored in the `K8s-project/` directory.
 ![2](K8s-project/ecr.png)
 ![3](K8s-project/image-in-ecr.png)
 ![4](K8s-project/k8s-running.png)
-![5](K8s-project/controller-nginx.png)
+![5](K8s-project/cntroller-nginx.png)
 ![6](K8s-project/ingress-working.png)
 ![7](K8s-project/monitoring.png)
 ![8](K8s-project/grafana.png)
